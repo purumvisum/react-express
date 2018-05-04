@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import TodoList from '../components/Todos/ToDoVisibleList';
 import { bindActionCreators } from 'redux';
 
-import { getTodos } from '../actions/todos';
+import { getTodos, addTodo, removeTodo } from '../actions/todos';
 import { todosListSelector } from '../selectors/todos';
 
 class Todos extends Component {
@@ -13,15 +13,16 @@ class Todos extends Component {
     }
 
     render() {
+        console.warn(this.props.todosList)
         return (
            <div>
                {
-                   this.props.todosList &&
+                   this.props.todosList && this.props.todosList.length > 0 &&
                    <TodoList
                        todos = { this.props.todosList }
                        emptyText = { 'sdfasdfadsf' }
-                       onTodoClick = { () => {alert('click')} }
-                       onTodoRemove = { () => {alert('remove')} }
+                       onTodoClick = { () => { this.props.addTodo() } }
+                       onTodoRemove = { this.props.removeTodo }
                    />
                }
            </div>
@@ -33,7 +34,9 @@ class Todos extends Component {
 
 function bindAction(dispatch) {
     return {
-        getTodos: bindActionCreators(getTodos, dispatch)
+        getTodos: bindActionCreators(getTodos, dispatch),
+        addTodo: bindActionCreators(addTodo, dispatch),
+        removeTodo: (todo) => dispatch(removeTodo(todo)),
     };
 }
 

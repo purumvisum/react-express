@@ -15,13 +15,16 @@ const styles = {
 };
 
 function ToDoItem({id, text, done, onToggle, onTodoRemove}) {
+    const todoId = id;
     return (
         <MuiThemeProvider>
             <List>
                 <ListItem key={id}
                           primaryText={text}
                           leftIcon={done && <ToggleCheckBox  style={styles.icon} /> || <ToggleCheckBoxOutlineBlank style={styles.icon}/>}
-                          rightIcon={<ActionDelete onClick={onTodoRemove}/>}
+                          rightIcon={<ActionDelete onClick={ () => {
+                              return onTodoRemove(id)
+                          }}/>}
                           onClick={onToggle}
                 />
                 <Divider />
