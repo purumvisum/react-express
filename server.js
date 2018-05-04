@@ -1,26 +1,24 @@
 const express = require('express');
-// var cors = require('cors')
+const MongoClient = require('mongodb').MongoClient;
+var cors = require('cors');
 
 const app = express();
 
-// app.use(cors())
+var url = 'mongodb://localhost:27017/todo';
 
-app.get('/api/customers', (req, res) => {
-    console.log(req.url)
-    const customers = [
-        {id: 1, firstName: 'John', lastName: 'Doe'},
-        {id: 2, firstName: 'Brad', lastName: 'Traversy'},
-        {id: 3, firstName: 'Mary', lastName: 'Swanson'},
-    ];
-
-    res.json(customers);
-});
-
-app.get('/test', (req, res) => {
-    console.log(req.url)
-    res.end('Hello')
-});
+app.use(cors())
 
 const port = 5000;
 
-app.listen(port, () => `Server running on port ${port}`);
+MongoClient.connect(url, function(err, client) {
+    const db = client.db('todo')
+
+    app.get('/api/todos', (req, res) => {
+        db.collection('todo').find({}).toArray(function(err, docs){
+            console.log(docs)
+            res.json(docs);
+        })
+    });
+
+    app.listen(port, () => `Server running on port ${port}`);
+})
