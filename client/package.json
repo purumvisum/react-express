@@ -22,12 +22,15 @@
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "file-loader": "^0.11.1",
+    "material-ui": "^0.20.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-redux": "^5.0.5",
     "redux": "^3.6.0",
+    "redux-actions": "^2.3.0",
     "redux-devtools-extension": "^2.13.2",
     "redux-saga": "^0.16.0",
+    "reselect": "^3.0.1",
     "svg-fill-loader": "0.0.8",
     "todo": "git+https://github.com/purumvisum/ToDoList-Redux-React-.git",
     "url-loader": "^0.5.8"

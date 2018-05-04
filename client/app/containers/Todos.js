@@ -1,30 +1,46 @@
 import React, { Component } from 'react';
-import TodoList from '../components/Todos/ToDoVisibleList'
+import { connect } from 'react-redux';
+import TodoList from '../components/Todos/ToDoVisibleList';
+import { bindActionCreators } from 'redux';
 
-export default class Todos extends Component {
+import { getTodos } from '../actions/todos';
+import { todosListSelector } from '../selectors/todos';
 
+class Todos extends Component {
+
+    componentDidMount() {
+        this.props.getTodos();
+    }
 
     render() {
         return (
            <div>
-               <TodoList
-                   todos = {
-                       [{
-                           text:"sdfsdFds",
-                           done:false,
-                           id:"8338196a-6c67-4345-9ad8-f059e2246882"
-                       },
-                       {
-                           text:"sdfsDF",
-                           done:false,
-                           id:"886e43ea-ca6d-49ae-86be-c85f854e6e44"
-                       }]
-                   }
-                   emptyText = { 'sdfasdfadsf' }
-                   onTodoClick = { () => {alert('click')} }
-                   onTodoRemove = { () => {alert('remove')} }
-               />
+               {
+                   this.props.todosList &&
+                   <TodoList
+                       todos = { this.props.todosList }
+                       emptyText = { 'sdfasdfadsf' }
+                       onTodoClick = { () => {alert('click')} }
+                       onTodoRemove = { () => {alert('remove')} }
+                   />
+               }
            </div>
         );
     }
 }
+
+
+
+function bindAction(dispatch) {
+    return {
+        getTodos: bindActionCreators(getTodos, dispatch)
+    };
+}
+
+function mapStateToProps(state) {
+    return {
+        todosList: todosListSelector(state),
+    };
+}
+
+export default connect(mapStateToProps, bindAction)(Todos);

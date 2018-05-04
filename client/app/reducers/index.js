@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
-import customerReducer from './customers';
+import todos from './todos';
 
 export default combineReducers({
-    customers: customerReducer
+    todos
 })
