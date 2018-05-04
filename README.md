@@ -11,6 +11,12 @@ npm run server - to run server part </br>
 cd client  </br>
 npm strat - to run webpack with client </br>
 
-
-You also need to create local mongo database 'todo' and 'todo' collection
+## Mongo Settings
+database: 'todo'</br>
+collection: 'todo'</br>
+</br>
+#### Mongo Structure:
+</br>
+text:<i>String</i></br>
+done:<i>Boolean</i></br>
 
