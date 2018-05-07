@@ -22,25 +22,20 @@ MongoClient.connect(url, function(err, client) {
         })
     });
 
-    app.put('/api/todo', (req, res) => {
+    app.put('/api/todo/:text', (req, res) => {
+        console.log('req.params.text', req.params.text)
         db.collection('todo').insert(
             {
-                text: 'qwe3',
+                text: req.params.text,
                 done: false
             }
         )
     });
 
     app.delete('/api/todo/:id', (req, res) => {
-        // console.log('req',req.url)
-        // console.log('req params',req.params.id)
-        // { 'text': 'qwe' }
-
-        const id = new ObjectID(req.params.id)
-        console.log(id)
         try {
             db.collection('todo').deleteOne(
-                {'_id': id}
+                {'_id': ObjectID(req.params.id)}
             )
         } catch (e) {
             console.log(e)

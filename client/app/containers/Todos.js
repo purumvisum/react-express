@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TodoList from '../components/Todos/ToDoVisibleList';
+import ToDoForm from '../components/Todos/TodoTextField';
 import { bindActionCreators } from 'redux';
 
 import { getTodos, addTodo, removeTodo } from '../actions/todos';
@@ -16,12 +17,15 @@ class Todos extends Component {
         console.warn(this.props.todosList)
         return (
            <div>
+               <ToDoForm
+                   addTodo = { this.props.addTodo }
+               />
                {
                    this.props.todosList && this.props.todosList.length > 0 &&
                    <TodoList
                        todos = { this.props.todosList }
                        emptyText = { 'sdfasdfadsf' }
-                       onTodoClick = { () => { this.props.addTodo() } }
+                       onTodoClick = { () => { console.log('click') } }
                        onTodoRemove = { this.props.removeTodo }
                    />
                }

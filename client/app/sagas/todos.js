@@ -17,13 +17,14 @@ function getTodosApi () {
         })
 }
 
-function* onAddTodo() {
-    yield call(addTodoApi);
+function* onAddTodo(action) {
+    console.log('action.payload', action.payload)
+    yield call(addTodoApi, action.payload);
 }
 
-function addTodoApi () {
+function addTodoApi (text) {
     return fetch(
-        'http://localhost:5000/api/todo',
+        `http://localhost:5000/api/todo/${text}`,
         {
             method: "PUT",
             body: ''
@@ -32,7 +33,6 @@ function addTodoApi () {
             return res.json();
         })
         .then(todos => {
-            console.log(todos)
             return todos
         })
 }
