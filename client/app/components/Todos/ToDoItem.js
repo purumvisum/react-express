@@ -25,7 +25,7 @@ function ToDoItem({id, text, done, onToggle, onTodoRemove}) {
                           rightIcon={<ActionDelete onClick={ () => {
                               return onTodoRemove(id)
                           }}/>}
-                          onClick={onToggle}
+                          onClick={ () => { onToggle(id)}}
                 />
                 <Divider />
             </List>

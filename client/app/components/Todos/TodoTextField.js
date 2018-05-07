@@ -1,9 +1,4 @@
 import React from 'react';
-
-//actions
-// import {addToDo} from '../actions/actions';
-
-// design
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import TextField from 'material-ui/TextField';
 import FloatingActionButton from 'material-ui/FloatingActionButton';

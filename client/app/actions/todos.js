@@ -5,3 +5,5 @@ export const setTodos = createAction('[TODO]SET_TODOS');
 
 export const addTodo = createAction('[TODO]ADD_TODO');
 export const removeTodo = createAction('[TODO]REMOVE_TODO');
+
+export const doneTodo = createAction('[TODO]DONE_TODO');

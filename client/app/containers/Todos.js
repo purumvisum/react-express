@@ -4,7 +4,12 @@ import TodoList from '../components/Todos/ToDoVisibleList';
 import ToDoForm from '../components/Todos/TodoTextField';
 import { bindActionCreators } from 'redux';
 
-import { getTodos, addTodo, removeTodo } from '../actions/todos';
+import {
+    getTodos,
+    addTodo,
+    removeTodo,
+    doneTodo
+} from '../actions/todos';
 import { todosListSelector } from '../selectors/todos';
 
 class Todos extends Component {
@@ -25,7 +30,7 @@ class Todos extends Component {
                    <TodoList
                        todos = { this.props.todosList }
                        emptyText = { 'sdfasdfadsf' }
-                       onTodoClick = { () => { console.log('click') } }
+                       onTodoClick = { this.props.doneTodo }
                        onTodoRemove = { this.props.removeTodo }
                    />
                }
@@ -41,6 +46,7 @@ function bindAction(dispatch) {
         getTodos: bindActionCreators(getTodos, dispatch),
         addTodo: bindActionCreators(addTodo, dispatch),
         removeTodo: (todo) => dispatch(removeTodo(todo)),
+        doneTodo: (todo) => dispatch(doneTodo(todo)),
     };
 }
 

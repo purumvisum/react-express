@@ -1,5 +1,12 @@
 import { call, put, select, takeEvery, all } from 'redux-saga/effects';
-import { addTodo, getTodos, setTodos, removeTodo } from '../actions/todos';
+import {
+    addTodo,
+    getTodos,
+    setTodos,
+    removeTodo,
+    doneTodo } from '../actions/todos';
+
+import { todosListSelector } from '../selectors/todos';
 
 function* onGetTodos() {
     const todosList = yield call(getTodosApi);
@@ -24,10 +31,11 @@ function* onAddTodo(action) {
 
 function addTodoApi (text) {
     return fetch(
-        `http://localhost:5000/api/todo/${text}`,
+        `http://localhost:5000/api/todo/`,
         {
-            method: "PUT",
-            body: ''
+            method: "POST",
+            headers: new Headers({ "Content-Type": "application/json" }),
+            body:  JSON.stringify({text})
         })
         .then(res => {
             return res.json();
@@ -36,6 +44,51 @@ function addTodoApi (text) {
             return todos
         })
 }
+
+
+function* onDoneTodo(action) {
+    const todos = yield select(state => todosListSelector(state));
+
+    const itemForUpdate = todos.find(item => {
+        return item._id === action.payload
+    })
+
+    let updatedItemSchema = {
+        done: !itemForUpdate.done,
+        text: itemForUpdate.text
+    }
+   // const updatedItemSchema = Object.assign(itemForUpdate, done: !itemForUpdate.done;
+
+    console.warn('updatedItemSchema', updatedItemSchema)
+
+    const id = action.payload
+    console.log(action.payload)
+    console.log(action)
+    yield call(updateTodoApi, id, updatedItemSchema);
+}
+
+function updateTodoApi (id, item) {
+    // console.log('id', id)
+    const data = {
+        id,
+        item
+    }
+    return fetch(
+        `http://localhost:5000/api/todo/`,
+        {
+            method: "PUT",
+            headers: new Headers({ "Content-Type": "application/json" }),
+            body :  JSON.stringify(data)
+        })
+        .then(res => {
+            return res.json();
+        })
+        .then(todos => {
+            console.log(todos)
+            return todos
+        })
+}
+
 
 
 function* onRemoveTodo(action) {
@@ -67,5 +120,6 @@ export default function* saga() {
         takeEvery(getTodos, onGetTodos),
         takeEvery(addTodo, onAddTodo),
         takeEvery(removeTodo, onRemoveTodo),
+        takeEvery(doneTodo, onDoneTodo),
     ]);
 }
