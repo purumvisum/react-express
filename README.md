@@ -1,8 +1,26 @@
 # react-express
-Todo List with server part
+Todo List with server part and Da. 
 
-react + redux + nodejs + express + mongoDB + saga + reselect + redux-actions
-</br></br>
+## Actions(All will be saved in database): 
+<ul>
+  <li>Add todo</li>
+  <li>Remove todo</li>
+  <li>Mark as done</li>
+</ul>
+## Stack: 
+<ul>
+  <ol>react</ol>
+  <ol>redux</ol>
+  <ol>nodejs</ol>
+  <ol>express</ol>
+  <ol>mongoDB</ol>
+  <ol>redux-saga</ol>
+  <ol>reselect</ol>
+  <ol>redux-actions</ol>
+</ul>
+</br>
+
+## Run
 npm run server - to run server part </br>
 cd client  </br>
 npm strat - to run webpack with client </br>
