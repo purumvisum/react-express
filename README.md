@@ -1,7 +1,7 @@
 # react-express
 Todo List with server part and Da. 
 
-## Actions(All will be saved in database): 
+## Rest Api: 
 <ul>
   <li>Add todo</li>
   <li>Remove todo</li>
@@ -29,11 +29,12 @@ npm start
 ```
 
 ## Mongo Settings
-database: 'todo'</br>
-collection: 'todo'</br>
-</br>
+```js
+database: 'todo'
+collection: 'todo'
+```
 #### Mongo Structure:
-</br>
-text:<i>String</i></br>
-done:<i>Boolean</i></br>
-
+```js
+text: String
+done: Boolean
+```
