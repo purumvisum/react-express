@@ -7,7 +7,8 @@ Todo List with server part and Da.
   <li>Remove todo</li>
   <li>Mark as done</li>
 </ul>
-## Stack: 
+
+## Technologies: 
 <ul>
   <ol>react</ol>
   <ol>redux</ol>
@@ -21,9 +22,11 @@ Todo List with server part and Da.
 </br>
 
 ## Run
-npm run server - to run server part </br>
-cd client  </br>
-npm strat - to run webpack with client </br>
+```js
+npm run server 
+cd client
+npm start
+```
 
 ## Mongo Settings
 database: 'todo'</br>
